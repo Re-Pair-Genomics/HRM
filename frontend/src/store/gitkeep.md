@@ -1,0 +1,1 @@
+# If use Redux, you can use this file to store the state of the application.
