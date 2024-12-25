@@ -2,8 +2,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import {
     Form,
     FormControl,
@@ -20,9 +18,6 @@ const formSchema = z.object({
     userId: z.string(),
     noteId: z.string()
 });
-
-const client = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(client);
 
 export default function MyForm({ formName }: { formName: string }) {
     const form = useForm<z.infer<typeof formSchema>>({
