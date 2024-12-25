@@ -30,5 +30,18 @@ export default $config({
         new sst.aws.Nextjs('MyWeb', {
             link: [table]
         });
+    },
+    console: {
+        autodeploy: {
+            target(event) {
+                if (
+                    event.type === 'branch' &&
+                    event.branch === 'main' &&
+                    event.action === 'pushed'
+                ) {
+                    return { stage: 'production' };
+                }
+            }
+        }
     }
 });
