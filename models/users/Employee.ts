@@ -2,13 +2,17 @@
 // Employees can also submit weekly work hour reports.
 
 import {User} from "@/models/users/User";
+import {WeeklyWorkHourReport} from "@/models/Reports/WeeklyWorkHourReport";
 
 export interface Employee extends User{
 
-    status: string; // active, inactive
+    status: 'Active' | 'Inactive';
+    reportSubmitted: boolean;
 
     hiredate: Date;
 
     paymentDetails: PaymentDetails;
-    workHours: number;
+    reports: WeeklyWorkHourReport[];
+
+    submitWorkHours(hours: number, supervisorid: number): Promise<Employee>;
 }
