@@ -13,4 +13,6 @@ export interface Employee extends User{
 
     paymentDetails: PaymentDetails;
     reports: WeeklyWorkHourReport[];
+
+    submitWorkHours(hours: number, supervisorid: number): Promise<Employee>;
 }
