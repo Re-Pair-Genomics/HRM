@@ -1,0 +1,12 @@
+node_modules/
+.env
+
+# sst
+.sst
+
+# open-next
+.open-next
+
+.next/
+
+.eslintcache
