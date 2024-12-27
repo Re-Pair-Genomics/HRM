@@ -13,8 +13,8 @@ export default $config({
                     region: 'us-east-1',
                     profile:
                         input.stage === 'production'
-                            ? 'jerrywcy-production'
-                            : 'jerrywcy-dev'
+                            ? 'production-profile'
+                            : 'dev-profile'
                 }
             }
         };
