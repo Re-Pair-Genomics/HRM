@@ -5,27 +5,7 @@ export class Payroll {
     readonly totalHours: number;
     readonly totalPay: number;
 
-    // static factory method for creating Payroll object
-    public static createPayroll({
-        timestamp,
-        employeeId,
-        totalHours,
-        totalPay
-    }: {
-        timestamp: Date;
-        employeeId: string;
-        totalHours: number;
-        totalPay: number;
-    }) {
-        return new this(
-            timestamp,
-            employeeId,
-            totalHours,
-            totalPay
-        );
-    }
-
-    constructor(
+    public constructor(
         timestamp: Date,
         employeeId: string,
         totalHours: number,

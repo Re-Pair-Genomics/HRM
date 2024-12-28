@@ -7,33 +7,7 @@ export class UserProfile {
     readonly phone: string;
     readonly address: string;
 
-    // static factory method for creating UserProfile object
-    public static createUserProfile({
-        firstname,
-        lastname,
-        title,
-        email,
-        phone,
-        address
-    }: {
-        firstname: string;
-        lastname: string;
-        title: string;
-        email: string;
-        phone: string;
-        address: string;
-    }) {
-        return new this(
-            firstname,
-            lastname,
-            title,
-            email,
-            phone,
-            address
-        );
-    }
-
-    constructor(
+    public constructor(
         firstname: string,
         lastname: string,
         title: string,

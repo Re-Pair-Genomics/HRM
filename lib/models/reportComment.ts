@@ -6,27 +6,7 @@ export class ReportComment {
     readonly creatorId: string;
     readonly timestamp: Date;
 
-    // static factory method for creating ReportComment object
-    static createReportComment({
-        reportId,
-        creatorId,
-        timestamp = new Date(),
-        comment
-    }: {
-        reportId: string;
-        creatorId: string;
-        timestamp: Date;
-        comment: string;
-    }) {
-        return new this(
-            reportId,
-            creatorId,
-            timestamp,
-            comment
-        );
-    }
-
-    constructor(
+    public constructor(
         reportId: string,
         creatorId: string,
         timestamp: Date,

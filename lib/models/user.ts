@@ -3,57 +3,28 @@ import { Action } from './action';
 import { PaymentDetails } from './paymentDetails';
 import { Report } from './report';
 import { Payroll } from './payroll';
+import { Organization } from './organization';
 
 export class User {
 
   readonly id: string;
+
   public username: string;
   public email: string;
   private password: string;
+  private organization: Organization | null;
   private profile: UserProfile | null;
   private actions: { [name: string]: Action } = {};
   private paymentInfo: PaymentDetails | null;
   private reportHistory: { [timestamp: number]: Report } = {};
   private payrollHistory: { [timestamp: number]: Payroll } = {};
 
-  // static factory method for creating User object
-  public static createUser({
-    username,
-    password,
-    email,
-    profile = null,
-    actions = {},
-    paymentInfo = null,
-    reportHistory = {},
-    payrollHistory = {}
-  }: {
-    username: string;
-    password: string;
-    email: string;
-    profile?: UserProfile | null;
-    actions?: { [name: string]: Action };
-    paymentInfo?: PaymentDetails | null;
-    reportHistory?: { [timestamp: number]: Report };
-    payrollHistory?: { [timestamp: number]: Payroll };
-  }) {
-    return new this(
-      crypto.randomUUID(),
-      username,
-      password,
-      email,
-      profile,
-      actions,
-      paymentInfo,
-      reportHistory,
-      payrollHistory
-    );
-  }
-
-  constructor(
+  public constructor(
     id: string,
     username: string,
     password: string,
     email: string,
+    organization: Organization | null,
     profile: UserProfile | null,
     actions: { [name: string]: Action },
     paymentInfo: PaymentDetails | null,
@@ -64,6 +35,7 @@ export class User {
     this.username = username;
     this.password = password;
     this.email = email;
+    this.organization = organization;
     this.profile = profile;
     this.actions = actions;
     this.paymentInfo = paymentInfo;
@@ -76,6 +48,7 @@ export class User {
     this.password = newPassword;
   }
 
+  // getter methods for public fields
   public getProfile() {
     return this.profile;
   }
@@ -86,6 +59,14 @@ export class User {
 
   public getPaymentInfo() {
     return this.paymentInfo;
+  }
+
+  public getOrganization() {
+    return this.organization;
+  }
+
+  public getActions() {
+    return this.actions;
   }
 
   // Add a new action to the user
@@ -111,6 +92,11 @@ export class User {
   // Update the user's profile
   public updateProfile(profile: UserProfile) {
     this.profile = profile;
+  }
+
+  // Update the user's organization
+  public updateOrganization(organization: Organization) {
+    this.organization = organization;
   }
 
   // Update the user's payment information

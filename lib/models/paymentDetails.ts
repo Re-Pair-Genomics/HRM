@@ -6,30 +6,7 @@ export class PaymentDetails {
     readonly accountExpiration: Date
     readonly accountCVV: number
 
-    // static factory method for creating PaymentDetails object
-    public static createPaymentDetails({
-        paymentMethod,
-        accountHolder,
-        accountNumber,
-        accountExpiration,
-        accountCVV
-    }: {
-        paymentMethod: string;
-        accountHolder: string;
-        accountNumber: string;
-        accountExpiration: Date;
-        accountCVV: number;
-    }) {
-        return new this(
-            paymentMethod,
-            accountHolder,
-            accountNumber,
-            accountExpiration,
-            accountCVV
-        );
-    }
-
-    constructor(
+    public constructor(
         paymentMethod: string,
         accountHolder: string, 
         accountNumber: string, 
