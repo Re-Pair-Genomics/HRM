@@ -12,8 +12,8 @@ export interface User {
   password: string;
   organization: Organization | null;
   profile: UserProfile | null;
-  actions: { [name: string]: Action };
+  actions: Record<string, Action>;
   paymentInfo: PaymentDetails | null;
-  reportHistory: { [timestamp: number]: Report };
-  payrollHistory: { [timestamp: number]: Payroll };
+  reportHistory: Record<number, Report>;
+  payrollHistory: Record<number, Payroll>;
 }

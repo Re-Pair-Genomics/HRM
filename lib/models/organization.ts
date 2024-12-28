@@ -7,5 +7,5 @@ export interface Organization {
     phone: string;
     email: string;
     website: string;
-    employees: { [id: string]: User } = {};
+    employees: Record<string, User>;
 }

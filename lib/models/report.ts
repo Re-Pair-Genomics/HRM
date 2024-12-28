@@ -5,7 +5,7 @@ export interface Report {
     status: "Pending" | "Approved" | "Changes Requested";
     reportDate: Date; // the work date user enters
     reportedHours: number;
-    comments: ReportComment[] = [];
+    comments: ReportComment[];
 
     reportId: string;
     employeeId: string;
