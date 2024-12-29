@@ -7,5 +7,5 @@ export interface Organization {
     phone: string;
     email: string;
     website: string;
-    employees: Record<string, User>;
+    employees: Record<string, User> | Promise<Record<string, User>>;
 }
