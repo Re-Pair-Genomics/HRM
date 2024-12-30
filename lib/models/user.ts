@@ -19,4 +19,5 @@ export interface User {
   paymentInfo: PaymentDetails | null;
   reportHistory: ReportHistory | Promise<ReportHistory>;
   payrollHistory: PayrollHistory | Promise<ReportHistory>;
+  createdDate: string;
 }

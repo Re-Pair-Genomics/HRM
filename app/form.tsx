@@ -13,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { onSubmit } from './onSubmit';
+import { signupController } from '@/lib/functions/signup/signupController';
 
 const formSchema = z.object({
     userId: z.string(),
@@ -29,6 +30,7 @@ export default function MyForm({ formName }: { formName: string }) {
     });
 
     return (
+        <>
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(async (values) => {
@@ -65,5 +67,7 @@ export default function MyForm({ formName }: { formName: string }) {
                 <Button type="submit">Submit</Button>
             </form>
         </Form>
+        <Button onClick={signupController}>test sign up</Button>
+        </>
     );
 }
