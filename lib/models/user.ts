@@ -20,4 +20,6 @@ export interface User {
   reportHistory: ReportHistory | Promise<ReportHistory>;
   payrollHistory: PayrollHistory | Promise<ReportHistory>;
   createdDate: string;
+  hireDate: string | null;
+  isActive: boolean;
 }

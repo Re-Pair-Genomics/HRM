@@ -32,7 +32,9 @@ export async function signupInteractor(
       profile: null,
       actions: {},
       paymentInfo: null,
-      CreatedDate: new Date().toISOString(),
+      createdDate: new Date().toISOString(),
+      hireDate: null,
+      isActive: true,
     };
 
     // Save the new user to the database

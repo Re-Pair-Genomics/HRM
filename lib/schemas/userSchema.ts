@@ -8,5 +8,7 @@ export interface UserSchema {
     profile: string | null;
     actions: Record<string, any>;
     paymentInfo: string | null;
-    CreatedDate: string;
+    createdDate: string;
+    hireDate: string | null;
+    isActive: boolean;
 }
