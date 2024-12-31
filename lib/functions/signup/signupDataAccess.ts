@@ -9,7 +9,6 @@ export interface SignupDataAccessInterface {
 }
 
 export class DynamoSignupDataAccess implements SignupDataAccessInterface {
-
     private client: DynamoDBDocumentClient;
 
     constructor() {
@@ -19,7 +18,7 @@ export class DynamoSignupDataAccess implements SignupDataAccessInterface {
     async createUser(data: UserSchema): Promise<void> {
         const command = new PutCommand({
             TableName: Resource.UserTable.name,
-            Item: data,
+            Item: data
         });
         await this.client.send(command);
     }

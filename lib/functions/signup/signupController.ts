@@ -1,6 +1,4 @@
-import { signupInteractor } from "./signupInteractor"
-import { DynamoSignupDataAccess } from "./signupDataAccess";
+import { signupInteractor } from './signupInteractor';
+import { DynamoSignupDataAccess } from './signupDataAccess';
 
-export async function signupController() {
-    
-}
+export async function signupController() {}

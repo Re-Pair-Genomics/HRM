@@ -1,6 +1,6 @@
 export interface UserSchema {
-    userId: string;       // partiton key: USER#<id>
-    dataType: 'USER';     // sort key: USER
+    userId: string; // partiton key: USER#<id>
+    dataType: 'USER'; // sort key: USER
     username: string;
     email: string;
     password: string;
