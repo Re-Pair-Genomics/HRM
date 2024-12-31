@@ -10,7 +10,8 @@ export type PayrollHistory = Record<number, Payroll>;
 
 export interface User {
   id: string;
-  username: string;
+  username: string; // TODO: How about the users can directly log in with his/her id and password? We don't need username.
+  // TODO: The 'status' attribute is ignored. We should keep all users' info, no matter they are active or inactive. However, only active users are allowed to log into their accounts.
   email: string;
   password: string;
   organization: Organization | null;
