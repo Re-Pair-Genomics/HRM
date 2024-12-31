@@ -28,6 +28,12 @@ importers:
             '@tanstack/react-table':
                 specifier: ^8.20.6
                 version: 8.20.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+            '@types/aws-lambda':
+                specifier: ^8.10.146
+                version: 8.10.146
+            bcryptjs:
+                specifier: ^2.4.3
+                version: 2.4.3
             class-variance-authority:
                 specifier: ^0.7.1
                 version: 0.7.1
@@ -53,8 +59,8 @@ importers:
                 specifier: ^7.54.2
                 version: 7.54.2(react@18.3.1)
             sst:
-                specifier: 3.4.27
-                version: 3.4.27
+                specifier: 3.4.37
+                version: 3.4.37
             tailwind-merge:
                 specifier: ^2.5.5
                 version: 2.5.5
@@ -65,6 +71,9 @@ importers:
                 specifier: ^3.24.1
                 version: 3.24.1
         devDependencies:
+            '@types/bcryptjs':
+                specifier: ^2.4.6
+                version: 2.4.6
             '@types/node':
                 specifier: ^20
                 version: 20.17.10
@@ -1010,6 +1019,18 @@ packages:
             }
         engines: { node: '>=12' }
 
+    '@types/aws-lambda@8.10.146':
+        resolution:
+            {
+                integrity: sha512-3BaDXYTh0e6UCJYL/jwV/3+GRslSc08toAiZSmleYtkAUyV5rtvdPYxrG/88uqvTuT6sb27WE9OS90ZNTIuQ0g==
+            }
+
+    '@types/bcryptjs@2.4.6':
+        resolution:
+            {
+                integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==
+            }
+
     '@types/json5@0.0.29':
         resolution:
             {
@@ -1328,6 +1349,12 @@ packages:
         resolution:
             {
                 integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+            }
+
+    bcryptjs@2.4.3:
+        resolution:
+            {
+                integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==
             }
 
     binary-extensions@2.3.0:
@@ -3357,50 +3384,50 @@ packages:
             }
         engines: { node: '>=0.10.0' }
 
-    sst-darwin-arm64@3.4.27:
+    sst-darwin-arm64@3.4.37:
         resolution:
             {
-                integrity: sha512-A8NyZ7Q3sv1B+t7PC2UTAnozrnifXhy1ERha59wOoyHhMC9Spb9tKNtRZSkr2YfmknqLMAB7ahqnD5e2DcpG+g==
+                integrity: sha512-1cK3yeMX67nyVdRpWjML/KgtAzf3225WiPuVdFr75doCQQcyn5JluocyfbYTiTQ3GwhEMBV4mcZbPi1QiCmEgg==
             }
         cpu: [arm64]
         os: [darwin]
 
-    sst-darwin-x64@3.4.27:
+    sst-darwin-x64@3.4.37:
         resolution:
             {
-                integrity: sha512-UXYxS7WIWp+wPNTFJL97Lbp4dhz+3u6dXo8v8wcW4tiikCITThV2S8jtSWo534KIlwxUFOCMtQxJSO35r5mg7w==
+                integrity: sha512-dPq46FvduXmM58ozF2jYKhpMLcAhN8rOjsSyfc0hqAIDw/TiyqZA+W/Iy4JXeaWBCQU5tyF/XuDGuKT/+xFQQA==
             }
         cpu: [x64]
         os: [darwin]
 
-    sst-linux-arm64@3.4.27:
+    sst-linux-arm64@3.4.37:
         resolution:
             {
-                integrity: sha512-Rw1Qcfk7nYzy/1xER6D8VBDYeOaHC3sjuF6aobkXqUnL8iwoGEoRnPyMHfpmWcWm51GSxUjxfByzUZbKunLUdA==
+                integrity: sha512-inAvaPi9XT9sRQrEq8rPBma+KJ8hxItvAIeYT5MvB3mCno9zpEBLD9qqZoaAA7Ivq8flcReVtA8xK3uj32pxkg==
             }
         cpu: [arm64]
         os: [linux]
 
-    sst-linux-x64@3.4.27:
+    sst-linux-x64@3.4.37:
         resolution:
             {
-                integrity: sha512-QVUKw/wDNb3LOpZYx9asCY0SyYoejXSsBk1tV02SjFpHm8X1Chs7UCGZbnnMXU/e1APEkkkEaIeRH5UQsbkEXw==
+                integrity: sha512-B0m/zMOlWfqZ9b2spgj8iH+6h1BrpYTmGK1Fyyiy0kFwl8qQQFq/vSlrp7IP4I7/S3dTh6Hag74Zq2ynzdZh3g==
             }
         cpu: [x64]
         os: [linux]
 
-    sst-linux-x86@3.4.27:
+    sst-linux-x86@3.4.37:
         resolution:
             {
-                integrity: sha512-7djfOVS3GJlr/iuK7SYEmtA2qZAh57rsvOVTWwqyuLDzxBAO+5kEQVXij3P0mbrTxSGYBSpcrpyU0aGdMNq0Hw==
+                integrity: sha512-sWDO90Ig0ueESG0FceuRhCV9Uqg1V750aJIbzs+NfVRwlwe6qHybmzxuoQzPWwOCLgxLCg84U2SVau3sJqDFmQ==
             }
         cpu: [x86]
         os: [linux]
 
-    sst@3.4.27:
+    sst@3.4.37:
         resolution:
             {
-                integrity: sha512-3BiVsT94i2sU2j0D78dhDg7O402Ak8Z4m4CR6LT9nzY9VLz7C21wM5ei56ZBeYktOYFotRIUV3yKGiPsxDPqmw==
+                integrity: sha512-fHofB5Cg3wIlXNhBNZhJV15grnWaldT00k2ZLfpGd7zrjygmdUjcCp+BmwHl8MHLvFF5FOeBL4ptFpZogfoDLg==
             }
         hasBin: true
         peerDependencies:
@@ -4782,6 +4809,10 @@ snapshots:
 
     '@tanstack/table-core@8.20.5': {}
 
+    '@types/aws-lambda@8.10.146': {}
+
+    '@types/bcryptjs@2.4.6': {}
+
     '@types/json5@0.0.29': {}
 
     '@types/node@20.17.10':
@@ -5004,6 +5035,8 @@ snapshots:
     axobject-query@4.1.0: {}
 
     balanced-match@1.0.2: {}
+
+    bcryptjs@2.4.3: {}
 
     binary-extensions@2.3.0: {}
 
@@ -5327,7 +5360,7 @@ snapshots:
         transitivePeerDependencies:
             - supports-color
 
-    eslint-module-utils@2.12.0(@typescript-eslint/parser@8.18.2(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0)(eslint@8.57.1))(eslint@8.57.1):
+    eslint-module-utils@2.12.0(@typescript-eslint/parser@8.18.2(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1):
         dependencies:
             debug: 3.2.7
         optionalDependencies:
@@ -5349,7 +5382,7 @@ snapshots:
             doctrine: 2.1.0
             eslint: 8.57.1
             eslint-import-resolver-node: 0.3.9
-            eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.18.2(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0)(eslint@8.57.1))(eslint@8.57.1)
+            eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.18.2(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1)
             hasown: 2.0.2
             is-core-module: 2.16.1
             is-glob: 4.0.3
@@ -6343,32 +6376,32 @@ snapshots:
 
     source-map-js@1.2.1: {}
 
-    sst-darwin-arm64@3.4.27:
+    sst-darwin-arm64@3.4.37:
         optional: true
 
-    sst-darwin-x64@3.4.27:
+    sst-darwin-x64@3.4.37:
         optional: true
 
-    sst-linux-arm64@3.4.27:
+    sst-linux-arm64@3.4.37:
         optional: true
 
-    sst-linux-x64@3.4.27:
+    sst-linux-x64@3.4.37:
         optional: true
 
-    sst-linux-x86@3.4.27:
+    sst-linux-x86@3.4.37:
         optional: true
 
-    sst@3.4.27:
+    sst@3.4.37:
         dependencies:
             aws4fetch: 1.0.20
             jose: 5.2.3
             openid-client: 5.6.4
         optionalDependencies:
-            sst-darwin-arm64: 3.4.27
-            sst-darwin-x64: 3.4.27
-            sst-linux-arm64: 3.4.27
-            sst-linux-x64: 3.4.27
-            sst-linux-x86: 3.4.27
+            sst-darwin-arm64: 3.4.37
+            sst-darwin-x64: 3.4.37
+            sst-linux-arm64: 3.4.37
+            sst-linux-x64: 3.4.37
+            sst-linux-x86: 3.4.37
 
     stable-hash@0.0.4: {}
 

@@ -27,8 +27,10 @@ export default $config({
             },
             primaryIndex: { hashKey: 'userId', rangeKey: 'noteId' }
         });
+        const userTable = await import('./lib/infra/dynamoDB');
+        const api = await import('./lib/infra/api');
         new sst.aws.Nextjs('MyWeb', {
-            link: [table]
+            link: [table, userTable, api]
         });
     },
     console: {
