@@ -1,4 +1,4 @@
-/// <reference path="./.sst/platform/config.d.ts" />
+import './.sst/platform/config';
 
 export default $config({
     app(input) {
@@ -11,21 +11,27 @@ export default $config({
             providers: {
                 aws: {
                     region: 'us-east-1',
-                    profile:
-                        input.stage === 'production'
-                            ? 'production-profile'
-                            : 'dev-profile'
+                    profile: input.stage === 'production' ? 'production' : 'dev'
                 }
             }
         };
     },
     async run() {
-        const table = new sst.aws.Dynamo('MyTable', {
+        const table = new sst.aws.Dynamo('Table', {
             fields: {
-                userId: 'string',
-                noteId: 'string'
+                PK: 'string',
+                username: "string",
+                email: "string"
             },
-            primaryIndex: { hashKey: 'userId', rangeKey: 'noteId' }
+            primaryIndex: { hashKey: 'PK' },
+            globalIndexes: {
+                UserEmailIndex: {
+                    hashKey: 'email'
+                },
+                UserUsernameIndex: {
+                    hashKey: 'username',
+                }
+            }
         });
         new sst.aws.Nextjs('MyWeb', {
             link: [table]
