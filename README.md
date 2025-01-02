@@ -41,33 +41,33 @@ You will need an AWS account with AdministratorAccess permission to manage resou
 1. Run the command:
 
     ```bash
-    aws configure --profile dev-profile
+    aws configure --profile dev
     ```
 
 2. Enter your AWS Access Key, Secret Access Key, default region (us-east-1 is recommended), and output format (e.g., json).
 
-3. Repeat the above steps for `production-profile`.
+3. Repeat the above steps for `production`.
 
 #### Using AWS SSO (Preferred for Organizations)
 
 1. Configure AWS SSO using:
 
     ```bash
-    aws configure sso --profile dev-profile
+    aws configure sso --profile dev
     ```
 
-    Follow the prompts to authenticate via SSO and link your `dev-profile` to the correct account and permissions.
+    Follow the prompts to authenticate via SSO and link your `dev` to the correct account and permissions.
 
 2. Repeat the above steps for production-profile.
 
-Ensure your `dev-profile` is configured for development environments and `production-profile` is reserved for production environments.
+Ensure your `dev` is configured for development environments and `production` is reserved for production environments.
 
 ### 5. Start the Development Server
 
 To begin working on the project in a local development environment, run:
 
 ```bash
-pnpx sst dev
+pnpm sst:dev
 ```
 
 To run the project with log information printed on `stdout`, run:
@@ -81,5 +81,7 @@ pnpx sst dev --print-logs
 When ready to deploy your application to production, use the following command:
 
 ```bash
-pnpx sst deploy --stage production
+pnpm sst:deploy
 ```
+
+Ensure that you are **not** using Node version 23.2, as the build process will fail with this version. See [this issue](https://github.com/nodejs/node/issues/55826).
