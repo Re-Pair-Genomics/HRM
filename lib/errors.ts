@@ -9,7 +9,7 @@ export class CreateUserFailedError extends Error {
     }
 }
 
-export class DuplicateUsernameError extends Error {
+export class UsernameAlreadyExistError extends Error {
     response: QueryCommandOutput;
     constructor(response: QueryCommandOutput) {
         super('Username already exists');
@@ -17,7 +17,7 @@ export class DuplicateUsernameError extends Error {
     }
 }
 
-export class DuplicateEmailError extends Error {
+export class EmailAlreadyExistError extends Error {
     response: QueryCommandOutput;
     constructor(response: QueryCommandOutput) {
         super('Email already exists');

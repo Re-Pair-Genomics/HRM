@@ -12,7 +12,11 @@ import { signup } from '../actions/signup';
 
 export default function Page() {
     function onSubmit(values: SignupFormValues) {
-        signup(values);
+        try {
+            signup(values);
+        } catch (error) {
+            alert(error);
+        }
     }
     return (
         <div className="flex items-center justify-center h-screen">

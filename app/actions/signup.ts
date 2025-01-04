@@ -1,6 +1,6 @@
 'use server';
 import { User } from '@/lib/models/user';
-import { CreateUserFailedError, DuplicateUsernameError, DuplicateEmailError } from '@/lib/errors';
+import { CreateUserFailedError, UsernameAlreadyExistError, EmailAlreadyExistError } from '@/lib/errors';
 import { PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { randomUUID } from 'crypto';
 import { docClient } from './client';
@@ -38,7 +38,7 @@ export async function signup(props: SignUpProps) {
     });
     const emailResponse = await docClient.send(emailQuery);
     if (emailResponse.Count && emailResponse.Count > 0) {
-        throw new DuplicateEmailError(emailResponse);
+        throw new EmailAlreadyExistError(emailResponse);
     }
     const usernameQuery = new QueryCommand({
         TableName: UsersTable.name,
@@ -50,7 +50,7 @@ export async function signup(props: SignUpProps) {
     });
     const usernameResponse = await docClient.send(usernameQuery);
     if (usernameResponse.Count && usernameResponse.Count > 0) {
-        throw new DuplicateUsernameError(usernameResponse);
+        throw new UsernameAlreadyExistError(usernameResponse);
     }
 
 

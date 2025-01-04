@@ -26,7 +26,11 @@ type LoginMethod = 'email' | 'username';
 
 export default function Page() {
     function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
-        console.log(login(values));
+        try {
+            console.log(login(values));
+        } catch (error) {
+            alert(error);
+        }
     }
     const [loginMethod, setLoginMethod] = useState<LoginMethod>('email');
     return (
