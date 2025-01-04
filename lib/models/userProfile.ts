@@ -1,8 +1,10 @@
 export interface UserProfile {
-    firstname: string;
-    lastname: string;
-    title: string; // employee title (CEO, Senior Manager...) for labelling and display only
-    email: string;
+    firstName: string;
+    lastName: string;
     phone: string;
     address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
 }

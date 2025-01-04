@@ -73,7 +73,7 @@ pnpm sst:dev
 To run the project with log information printed on `stdout`, run:
 
 ```bash
-pnpx sst dev --print-logs
+pnpm sst:dev --print-logs
 ```
 
 ### 6. Deploy to Production

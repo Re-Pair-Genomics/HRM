@@ -8,10 +8,11 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 import SignupForm, { SignupFormValues } from './SignupForm';
+import { signup } from '../actions/signup';
 
 export default function Page() {
     function onSubmit(values: SignupFormValues) {
-        console.log(values);
+        signup(values);
     }
     return (
         <div className="flex items-center justify-center h-screen">

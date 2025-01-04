@@ -20,12 +20,13 @@ import UsernameLoginForm, {
     UsernameLoginFormValues
 } from './UsernameLoginForm';
 import EmailLoginForm, { EmailLoginFormValues } from './EmailLoginForm';
+import { login } from '../actions/login';
 
 type LoginMethod = 'email' | 'username';
 
 export default function Page() {
     function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
-        console.log(values);
+        console.log(login(values));
     }
     const [loginMethod, setLoginMethod] = useState<LoginMethod>('email');
     return (
