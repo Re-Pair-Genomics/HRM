@@ -21,9 +21,6 @@ export async function signup(props: SignUpProps) {
         email,
         password: hashedPassword,
         username,
-        organizationId: null,
-        profileId: null,
-        paymentInfoId: null,
         permissions: {},
     };
 

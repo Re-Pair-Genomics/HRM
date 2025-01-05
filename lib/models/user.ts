@@ -6,8 +6,8 @@ export interface User {
     username: string;
     email: string;
     password: string;
-    organizationId: string | null;
-    profileId: string | null;
-    paymentInfoId: string | null;
+    organizationId?: string;
+    profileId?: string;
+    paymentInfoId?: string;
     permissions: Record<string, Permission>;
 }

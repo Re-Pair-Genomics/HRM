@@ -4,8 +4,8 @@ export interface Organization {
     PK: `ORG#${string}`;
     name: string;
     address: string;
-    phone: string | null;
-    email: string | null;
-    website: string | null;
+    phone?: string;
+    email?: string;
+    website?: string;
     employees: Record<string, User> | Promise<Record<string, User>>;
 }
