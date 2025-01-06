@@ -21,7 +21,7 @@ export async function signup(props: SignUpProps) {
         email,
         password: hashedPassword,
         username,
-        permissions: {},
+        permissions: {createOrganization: true, joinOrganization: true},
     };
 
     // Check for duplicate username or email
