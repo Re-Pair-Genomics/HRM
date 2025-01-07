@@ -6,12 +6,27 @@ import {
     CardHeader,
     CardTitle
 } from '@/components/ui/card';
+import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import SignupForm, { SignupFormValues } from './SignupForm';
+import { signup } from '../actions/signup';
 
 export default function Page() {
-    function onSubmit(values: SignupFormValues) {
-        console.log(values);
+    const router = useRouter();
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    async function onSubmit(values: SignupFormValues) {
+        try {
+            await signup(values);
+            router.push('/login');
+        } catch (error: unknown ) {
+            if (error instanceof Error) {
+                setErrorMessage(error.message);
+            } else {
+                setErrorMessage('An unexpected error occurred.');
+            }
+        }
     }
     return (
         <div className="flex items-center justify-center h-screen">
@@ -20,6 +35,7 @@ export default function Page() {
                     <CardTitle>Sign Up</CardTitle>
                 </CardHeader>
                 <CardContent>
+                    {errorMessage && (<p className="text-red-500 text-sm mb-4">{errorMessage}</p>)}
                     <SignupForm onSubmit={onSubmit} />
                 </CardContent>
                 <CardFooter>

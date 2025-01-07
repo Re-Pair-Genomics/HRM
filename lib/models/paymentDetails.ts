@@ -1,4 +1,5 @@
 export interface PaymentDetails {
+    PK: `PAYMENT#${string}`;
     paymentMethod: string;
     accountHolder: string;
     accountNumber: string;

@@ -20,12 +20,24 @@ import UsernameLoginForm, {
     UsernameLoginFormValues
 } from './UsernameLoginForm';
 import EmailLoginForm, { EmailLoginFormValues } from './EmailLoginForm';
+import { login } from '../actions/login';
 
 type LoginMethod = 'email' | 'username';
 
 export default function Page() {
-    function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
-        console.log(values);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    async function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
+        try {
+            const response = await login(values);
+            console.log(response);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setErrorMessage(error.message);
+            } else {
+                setErrorMessage('An unexpected error occurred.');
+            }
+        }
     }
     const [loginMethod, setLoginMethod] = useState<LoginMethod>('email');
     return (
@@ -62,12 +74,14 @@ export default function Page() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
+                    {errorMessage && (<p className="text-red-500 text-sm mb-4">{errorMessage}</p>)}
                     {loginMethod === 'email' ? (
                         <EmailLoginForm onSubmit={onSubmit} />
                     ) : (
                         <UsernameLoginForm onSubmit={onSubmit} />
                     )}
                 </CardContent>
+                
                 <CardFooter>
                     <p>
                         Not registered? Sign up{' '}

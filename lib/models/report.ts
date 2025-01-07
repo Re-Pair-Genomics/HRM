@@ -1,6 +1,7 @@
 import { ReportComment } from './reportComment';
 
 export interface Report {
+    PK: `REPORT#${string}`;
     reviewerId: string;
     status: 'Pending' | 'Approved' | 'Changes Requested';
     reportDate: Date; // the work date user enters

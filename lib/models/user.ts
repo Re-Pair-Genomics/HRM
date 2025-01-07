@@ -1,22 +1,42 @@
-import { UserProfile } from './userProfile';
-import { Action } from './action';
-import { PaymentDetails } from './paymentDetails';
-import { Report } from './report';
-import { Payroll } from './payroll';
-import { Organization } from './organization';
-
-export type ReportHistory = Record<number, Report>;
-export type PayrollHistory = Record<number, Payroll>;
+import { Permissions, PermissionKey } from './permission';
 
 export interface User {
-    id: string;
+    PK: `USER#${string}`;
     username: string;
     email: string;
     password: string;
-    organization: Organization | null;
-    profile: UserProfile | null;
-    actions: Record<string, Action>;
-    paymentInfo: PaymentDetails | null;
-    reportHistory: ReportHistory | Promise<ReportHistory>;
-    payrollHistory: PayrollHistory | Promise<ReportHistory>;
+    permissions: Record<PermissionKey, boolean>;
+    organizationId?: string;
+    profileId?: string;
+    paymentInfoId?: string;
+}
+
+
+declare const phantom: unique symbol;
+export type AuthorizedUser<T extends Partial<Permissions>> = User & {
+    [phantom]: T;
+};
+
+type AuthorizeResult<T extends Permissions> = 
+    | { type: "ok"; user: AuthorizedUser<T> }
+    | { type: "fail"; reason: string }
+    
+function authorize<T extends Permissions>(
+    user: User,
+    permission: T
+): AuthorizeResult<T> {
+
+    const keys = Object.keys(permission) as PermissionKey[];
+    if (keys.every(key => user.permissions[key])) {
+        return { type: "ok", user: user as AuthorizedUser<T> };
+    } else {
+        return { type: "fail", reason: "Permission denied" };
+    }
+}
+
+export function hasPermission<T extends Permissions>(
+    user: User,
+    permission: T
+): user is AuthorizedUser<T> {
+    return authorize(user, permission).type === "ok";
 }
