@@ -1,9 +1,9 @@
 'use server';
-
 import { QueryCommand, QueryCommandOutput } from '@aws-sdk/lib-dynamodb';
 import { docClient } from './client';
 import { UsersTable } from '@/lib/table';
 import * as bcypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { LoginFailedError, UserNotFoundError, WrongPasswordError } from '@/lib/errors';
 
 
@@ -65,5 +65,16 @@ async function verifyUser(response: QueryCommandOutput, password: string) {
     if (!await bcypt.compare(password, user.password)) {
         throw new WrongPasswordError(response);
     }
-    return user;
+    // generate token for the session
+    try {
+        const token = jwt.sign(
+            { id: user.PK },
+            process.env.JWT_SECRET_KEY!,
+            { expiresIn: process.env.JWT_TOKEN_EXPIRATION_TIME }
+        )
+        return { token, user };
+    } catch (error) {
+        console.error(error);
+        throw new LoginFailedError(response);
+    }
 }

@@ -16,6 +16,7 @@ import {
     SelectValue
 } from '@/components/ui/select';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import UsernameLoginForm, {
     UsernameLoginFormValues
 } from './UsernameLoginForm';
@@ -26,11 +27,17 @@ type LoginMethod = 'email' | 'username';
 
 export default function Page() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const router = useRouter();
 
     async function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
         try {
-            const response = await login(values);
-            console.log(response);
+            const { token, user } = await login(values);
+            localStorage.setItem('rePairGenomicsToken', token);
+            if (user.organizationId) {
+                // TODO: redirect to the organization dashboard
+            } else {
+                router.push('/choose-organization');
+            }
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setErrorMessage(error.message);
