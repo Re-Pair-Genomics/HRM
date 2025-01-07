@@ -30,7 +30,11 @@ export default function ChooseOrganizationPage() {
                             Start your own organization and manage everything in
                             one place.
                         </p>
-                        <Button variant="default" className="mt-6 w-full" onClick={() => router.push('/create-organization')}>
+                        <Button
+                            variant="default"
+                            className="mt-6 w-full"
+                            onClick={() => router.push('/create-organization')}
+                        >
                             Create
                         </Button>
                     </CardContent>

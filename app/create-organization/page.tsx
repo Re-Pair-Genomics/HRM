@@ -10,8 +10,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import OrganizationForm, { OrganizationFormValues } from './OrganizationForm';
 
-
-
 export default function Page() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -42,7 +40,10 @@ export default function Page() {
                 </CardContent>
                 <CardFooter>
                     <p>
-                        <Link href="/choose-organization" className="underline text-blue-500">
+                        <Link
+                            href="/choose-organization"
+                            className="underline text-blue-500"
+                        >
                             Back
                         </Link>
                     </p>

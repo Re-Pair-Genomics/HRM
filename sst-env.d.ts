@@ -2,17 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 /* deno-fmt-ignore-file */
-import "sst"
-export {}
-declare module "sst" {
-  export interface Resource {
-    "MyWeb": {
-      "type": "sst.aws.Nextjs"
-      "url": string
+import 'sst';
+export {};
+declare module 'sst' {
+    export interface Resource {
+        MyWeb: {
+            type: 'sst.aws.Nextjs';
+            url: string;
+        };
+        Table: {
+            name: string;
+            type: 'sst.aws.Dynamo';
+        };
     }
-    "Table": {
-      "name": string
-      "type": "sst.aws.Dynamo"
-    }
-  }
 }
