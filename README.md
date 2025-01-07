@@ -6,6 +6,9 @@ This is the internal human resource management software.
 
 ### 1. Install Dependencies
 
+Download node.js from the official website
+```pass for now```
+
 Run the following command to install all required dependencies for the project:
 
 ```bash
@@ -75,6 +78,9 @@ To run the project with log information printed on `stdout`, run:
 ```bash
 pnpm sst:dev --print-logs
 ```
+
+If you are using npm, instead of pnpm, use the following instructions instead
+```pass for now```
 
 ### 6. Deploy to Production
 
