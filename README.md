@@ -6,8 +6,7 @@ This is the internal human resource management software.
 
 ### 1. Install Dependencies
 
-Download node.js from the official website
-```pass for now```
+Download node.js from the [official website](https://nodejs.org/en/download).
 
 Run the following command to install all required dependencies for the project:
 
