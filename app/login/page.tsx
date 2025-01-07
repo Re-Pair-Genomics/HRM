@@ -29,7 +29,9 @@ export default function Page() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const router = useRouter();
 
-    async function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
+    async function onSubmit(
+        values: UsernameLoginFormValues | EmailLoginFormValues
+    ) {
         try {
             const { token, user } = await login(values);
             localStorage.setItem('rePairGenomicsToken', token);
@@ -81,14 +83,18 @@ export default function Page() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {errorMessage && (<p className="text-red-500 text-sm mb-4">{errorMessage}</p>)}
+                    {errorMessage && (
+                        <p className="text-red-500 text-sm mb-4">
+                            {errorMessage}
+                        </p>
+                    )}
                     {loginMethod === 'email' ? (
                         <EmailLoginForm onSubmit={onSubmit} />
                     ) : (
                         <UsernameLoginForm onSubmit={onSubmit} />
                     )}
                 </CardContent>
-                
+
                 <CardFooter>
                     <p>
                         Not registered? Sign up{' '}

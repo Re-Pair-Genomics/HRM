@@ -1,6 +1,10 @@
 'use server';
 import { User } from '@/lib/models/user';
-import { CreateUserFailedError, UsernameAlreadyExistError, EmailAlreadyExistError } from '@/lib/errors';
+import {
+    CreateUserFailedError,
+    UsernameAlreadyExistError,
+    EmailAlreadyExistError
+} from '@/lib/errors';
 import { PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { randomUUID } from 'crypto';
 import { docClient } from './client';
@@ -21,17 +25,17 @@ export async function signup(props: SignUpProps) {
         email,
         password: hashedPassword,
         username,
-        permissions: {createOrganization: true, joinOrganization: true},
+        permissions: { createOrganization: true, joinOrganization: true }
     };
 
     // Check for duplicate username or email
     const emailQuery = new QueryCommand({
         TableName: UsersTable.name,
-        IndexName: "UserEmailIndex",
-        KeyConditionExpression: "email = :email",
+        IndexName: 'UserEmailIndex',
+        KeyConditionExpression: 'email = :email',
         ExpressionAttributeValues: {
-            ":email": email,
-        },
+            ':email': email
+        }
     });
     const emailResponse = await docClient.send(emailQuery);
     if (emailResponse.Count && emailResponse.Count > 0) {
@@ -39,17 +43,16 @@ export async function signup(props: SignUpProps) {
     }
     const usernameQuery = new QueryCommand({
         TableName: UsersTable.name,
-        IndexName: "UserUsernameIndex",
-        KeyConditionExpression: "username = :username",
+        IndexName: 'UserUsernameIndex',
+        KeyConditionExpression: 'username = :username',
         ExpressionAttributeValues: {
-            ":username": username,
-        },
+            ':username': username
+        }
     });
     const usernameResponse = await docClient.send(usernameQuery);
     if (usernameResponse.Count && usernameResponse.Count > 0) {
         throw new UsernameAlreadyExistError(usernameResponse);
     }
-
 
     const command = new PutCommand({
         TableName: UsersTable.name,
@@ -61,4 +64,3 @@ export async function signup(props: SignUpProps) {
     }
     return user;
 }
-
