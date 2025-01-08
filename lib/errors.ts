@@ -1,31 +1,18 @@
-import {
-    PutCommandOutput,
-    TransactWriteCommandOutput
-} from '@aws-sdk/lib-dynamodb';
+import { TransactWriteCommandOutput } from '@aws-sdk/lib-dynamodb';
 import { QueryCommandOutput } from '@aws-sdk/lib-dynamodb';
 import { User } from './models/user';
 
 export class CreateUserFailedError extends Error {
-    response: PutCommandOutput;
-    constructor(response: PutCommandOutput) {
+    error: Error;
+    constructor(error: Error) {
         super('Failed to create user');
-        this.response = response;
+        this.error = error;
     }
 }
 
-export class UsernameAlreadyExistError extends Error {
-    response: QueryCommandOutput;
-    constructor(response: QueryCommandOutput) {
-        super('Username already exists');
-        this.response = response;
-    }
-}
-
-export class EmailAlreadyExistError extends Error {
-    response: QueryCommandOutput;
-    constructor(response: QueryCommandOutput) {
-        super('Email already exists');
-        this.response = response;
+export class DuplicateUserError extends Error {
+    constructor() {
+        super('Username or email already exists');
     }
 }
 

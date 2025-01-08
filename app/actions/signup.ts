@@ -1,11 +1,7 @@
 'use server';
 import { User } from '@/lib/models/user';
-import {
-    CreateUserFailedError,
-    UsernameAlreadyExistError,
-    EmailAlreadyExistError
-} from '@/lib/errors';
-import { PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { DuplicateUserError, CreateUserFailedError } from '@/lib/errors';
+import { PutCommand } from '@aws-sdk/lib-dynamodb';
 import { randomUUID } from 'crypto';
 import { docClient } from './client';
 import { UsersTable } from '@/lib/table';
@@ -28,39 +24,31 @@ export async function signup(props: SignUpProps) {
         permissions: { createOrganization: true, joinOrganization: true }
     };
 
-    // Check for duplicate username or email
-    const emailQuery = new QueryCommand({
+    const command = new PutCommand({
         TableName: UsersTable.name,
-        IndexName: 'UserEmailIndex',
-        KeyConditionExpression: 'email = :email',
+        Item: user,
+        ConditionExpression:
+            'attribute_not_exists(email) AND attribute_not_exists(username)',
+        ExpressionAttributeNames: {
+            '#email': 'email',
+            '#username': 'username'
+        },
         ExpressionAttributeValues: {
-            ':email': email
-        }
-    });
-    const emailResponse = await docClient.send(emailQuery);
-    if (emailResponse.Count && emailResponse.Count > 0) {
-        throw new EmailAlreadyExistError(emailResponse);
-    }
-    const usernameQuery = new QueryCommand({
-        TableName: UsersTable.name,
-        IndexName: 'UserUsernameIndex',
-        KeyConditionExpression: 'username = :username',
-        ExpressionAttributeValues: {
+            ':email': email,
             ':username': username
         }
     });
-    const usernameResponse = await docClient.send(usernameQuery);
-    if (usernameResponse.Count && usernameResponse.Count > 0) {
-        throw new UsernameAlreadyExistError(usernameResponse);
-    }
 
-    const command = new PutCommand({
-        TableName: UsersTable.name,
-        Item: user
-    });
-    const response = await docClient.send(command);
-    if (response.$metadata.httpStatusCode !== 200) {
-        throw new CreateUserFailedError(response);
+    try {
+        await docClient.send(command);
+        return user;
+    } catch (error) {
+        if (error instanceof Error) {
+            if (error.name === 'ConditionalCheckFailedException') {
+                throw new DuplicateUserError();
+            }
+            throw new CreateUserFailedError(error);
+        }
+        return error;
     }
-    return user;
 }
