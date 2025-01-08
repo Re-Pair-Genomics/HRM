@@ -10,7 +10,7 @@ export default function Guard(props: { children: React.ReactNode }) {
     useEffect(() => {
         console.log('localStorage:', localStorage);
         if (
-            !localStorage.getItem('rePairGenomicsToken') &&
+            !localStorage.getItem('JWTToken') &&
             !publicRoutes.includes(pathname)
         ) {
             router.push('/login');

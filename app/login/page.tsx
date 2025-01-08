@@ -34,7 +34,7 @@ export default function Page() {
     ) {
         try {
             const { token, user } = await login(values);
-            localStorage.setItem('rePairGenomicsToken', token);
+            localStorage.setItem('JWTToken', token);
             if (user.organizationId) {
                 // TODO: redirect to the organization dashboard
             } else {

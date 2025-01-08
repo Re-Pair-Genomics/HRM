@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 import { useState } from 'react';
+import { createOrganization } from '../actions/createOrganization';
 import OrganizationForm, { OrganizationFormValues } from './OrganizationForm';
 
 export default function Page() {
@@ -15,7 +16,7 @@ export default function Page() {
 
     async function onSubmit(values: OrganizationFormValues) {
         try {
-            console.log(values);
+            await createOrganization(values, localStorage.getItem('JWTToken'));
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setErrorMessage(error.message);
