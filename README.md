@@ -1,44 +1,59 @@
 # HRM
 
-This is the internal human resource management software.
+HRM is an internal human resource management software.
 
-## How to run
+# Version
+v0.0.0 - not yet released.
+Latest update: Jan 2025.
 
-### 1. Install Dependencies
+# Getting started
 
-Download node.js from the [official website](https://nodejs.org/en/download).
+Below are instructions for developers.
 
-Run the following command to install all required dependencies for the project:
+## Prerequisites
+1. __Download Node.js__ from the [official website](https://nodejs.org/en/download).
+   - We highly recommend you use v22.3.0 (LTS). 
+   - You can either download it with `npm` or `pnpm`
+   - Verify that Node is successfully downloaded, run this command line on your terminal:
+   ```Bash
+   node --version
+   ```
+   
+2. __Install Dependencies__
+   - If you are using `npm`, you can install the required dependencies by running the following command:
+   ```bash
+   npm install
+   ```
+   
+   - If you are using `pnpm`, run the following command instead:
+   ```bash
+   pnpm install
+   ```
 
-```bash
-pnpm install
-```
+3. __Install SST__
 
-### 2. Install SST
+   - If you are using `npm`, install the Serverless Stack 
+   - pass for now
+   - If you are using `pnpm`, install the Serverless Stack (SST) CLI using the following command line:
+   ```bash
+   pnpm sst install
+   ```
+   - Verify sst is successfully installed:
+   ```Bash
+   sst version
+   ```
 
-Install the Serverless Stack (SST) CLI using:
+4. __Install AWS CLI__ by following instructions on the [official documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+   - Verify that AWS CLI is correctly installed and can be directly accessed from your terminal:
+   ```bash
+   aws --version
+   ```
 
-```bash
-pnpm sst install
-```
+## Set Up your AWS Account and Profiles
 
-### 3. Install AWS CLI
+You will need an AWS account with AdministratorAccess permission to manage resources. Follow these steps to configure AWS profiles, you can choose either ways:
 
-Install the AWS CLI by following the [official documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-
-Ensure that the AWS CLI is correctly installed and accessible from your terminal:
-
-```bash
-aws --version
-```
-
-If the installation is successful, this command will output the version of AWS CLI installed.
-
-### 4. Set Up AWS Account and Profiles
-
-You will need an AWS account with AdministratorAccess permission to manage resources. Follow these steps to configure AWS profiles
-
-#### Using Static Credentials
+### (Option 1): Using Static Credentials
 
 1. Run the command:
 
@@ -50,7 +65,7 @@ You will need an AWS account with AdministratorAccess permission to manage resou
 
 3. Repeat the above steps for `production`.
 
-#### Using AWS SSO (Preferred for Organizations)
+### (Option 2): Using AWS SSO (Preferred for Organizations)
 
 1. Configure AWS SSO using:
 
@@ -64,7 +79,7 @@ You will need an AWS account with AdministratorAccess permission to manage resou
 
 Ensure your `dev` is configured for development environments and `production` is reserved for production environments.
 
-### 5. Start the Development Server
+## Start the Development
 
 To begin working on the project in a local development environment, run:
 
@@ -78,10 +93,12 @@ To run the project with log information printed on `stdout`, run:
 pnpm sst:dev --print-logs
 ```
 
-If you are using npm, instead of pnpm, use the following instructions instead
-```pass for now```
+If you are using npm, use the following instructions instead
+```bash
+sst dev
+```
 
-### 6. Deploy to Production
+## Deploy to Production
 
 When ready to deploy your application to production, use the following command:
 
