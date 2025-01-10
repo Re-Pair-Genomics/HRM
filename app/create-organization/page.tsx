@@ -6,20 +6,17 @@ import {
     CardHeader,
     CardTitle
 } from '@/components/ui/card';
-import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import SignupForm, { SignupFormValues } from './SignupForm';
-import { signup } from '../actions/signup';
+import { useState } from 'react';
+import { createOrganization } from '../actions/createOrganization';
+import OrganizationForm, { OrganizationFormValues } from './OrganizationForm';
 
 export default function Page() {
-    const router = useRouter();
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    async function onSubmit(values: SignupFormValues) {
+    async function onSubmit(values: OrganizationFormValues) {
         try {
-            await signup(values);
-            router.push('/login');
+            await createOrganization(values, localStorage.getItem('JWTToken'));
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setErrorMessage(error.message);
@@ -32,7 +29,7 @@ export default function Page() {
         <div className="flex items-center justify-center h-screen">
             <Card>
                 <CardHeader>
-                    <CardTitle>Sign Up</CardTitle>
+                    <CardTitle>Organization Profile</CardTitle>
                 </CardHeader>
                 <CardContent>
                     {errorMessage && (
@@ -40,13 +37,15 @@ export default function Page() {
                             {errorMessage}
                         </p>
                     )}
-                    <SignupForm onSubmit={onSubmit} />
+                    <OrganizationForm onSubmit={onSubmit} />
                 </CardContent>
                 <CardFooter>
                     <p>
-                        Already have an account? Log in{' '}
-                        <Link href="/login" className="underline text-blue-500">
-                            here
+                        <Link
+                            href="/choose-organization"
+                            className="underline text-blue-500"
+                        >
+                            Back
                         </Link>
                     </p>
                 </CardFooter>

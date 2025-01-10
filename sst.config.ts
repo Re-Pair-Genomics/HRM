@@ -1,6 +1,5 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
-
 export default $config({
     app(input) {
         return {
@@ -21,8 +20,8 @@ export default $config({
         const table = new sst.aws.Dynamo('Table', {
             fields: {
                 PK: 'string',
-                username: "string",
-                email: "string"
+                username: 'string',
+                email: 'string'
             },
             primaryIndex: { hashKey: 'PK' },
             globalIndexes: {
@@ -30,7 +29,7 @@ export default $config({
                     hashKey: 'email'
                 },
                 UserUsernameIndex: {
-                    hashKey: 'username',
+                    hashKey: 'username'
                 }
             }
         });

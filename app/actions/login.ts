@@ -1,11 +1,14 @@
 'use server';
-
 import { QueryCommand, QueryCommandOutput } from '@aws-sdk/lib-dynamodb';
 import { docClient } from './client';
 import { UsersTable } from '@/lib/table';
 import * as bcypt from 'bcryptjs';
-import { LoginFailedError, UserNotFoundError, WrongPasswordError } from '@/lib/errors';
-
+import jwt from 'jsonwebtoken';
+import {
+    LoginFailedError,
+    UserNotFoundError,
+    WrongPasswordError
+} from '@/lib/errors';
 
 interface UsernameLoginProps {
     username: string;
@@ -22,7 +25,7 @@ export type LoginProps = UsernameLoginProps | EmailLoginProps;
 async function loginWithUsername(username: string, password: string) {
     const command = new QueryCommand({
         TableName: UsersTable.name,
-        IndexName: "UserUsernameIndex",
+        IndexName: 'UserUsernameIndex',
         KeyConditionExpression: 'username = :username',
         ExpressionAttributeValues: {
             ':username': username
@@ -35,10 +38,10 @@ async function loginWithUsername(username: string, password: string) {
 async function loginWithEmail(email: string, password: string) {
     const command = new QueryCommand({
         TableName: UsersTable.name,
-        IndexName: "UserEmailIndex",
-        KeyConditionExpression: "email = :email",
+        IndexName: 'UserEmailIndex',
+        KeyConditionExpression: 'email = :email',
         ExpressionAttributeValues: {
-            ":email": email,
+            ':email': email
         }
     });
     const response = await docClient.send(command);
@@ -62,8 +65,17 @@ async function verifyUser(response: QueryCommandOutput, password: string) {
         throw new UserNotFoundError(response);
     }
     // verify password
-    if (!await bcypt.compare(password, user.password)) {
+    if (!(await bcypt.compare(password, user.password))) {
         throw new WrongPasswordError(response);
     }
-    return user;
+    // generate token for the session
+    try {
+        const token = jwt.sign({ id: user.PK }, process.env.JWT_SECRET_KEY!, {
+            expiresIn: process.env.JWT_TOKEN_EXPIRATION_TIME
+        });
+        return { token, user };
+    } catch (error) {
+        console.error(error);
+        throw new LoginFailedError(response);
+    }
 }

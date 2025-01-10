@@ -16,6 +16,7 @@ import {
     SelectValue
 } from '@/components/ui/select';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import UsernameLoginForm, {
     UsernameLoginFormValues
 } from './UsernameLoginForm';
@@ -26,11 +27,19 @@ type LoginMethod = 'email' | 'username';
 
 export default function Page() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const router = useRouter();
 
-    async function onSubmit(values: UsernameLoginFormValues | EmailLoginFormValues) {
+    async function onSubmit(
+        values: UsernameLoginFormValues | EmailLoginFormValues
+    ) {
         try {
-            const response = await login(values);
-            console.log(response);
+            const { token, user } = await login(values);
+            localStorage.setItem('JWTToken', token);
+            if (user.organizationId) {
+                // TODO: redirect to the organization dashboard
+            } else {
+                router.push('/choose-organization');
+            }
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setErrorMessage(error.message);
@@ -74,14 +83,18 @@ export default function Page() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {errorMessage && (<p className="text-red-500 text-sm mb-4">{errorMessage}</p>)}
+                    {errorMessage && (
+                        <p className="text-red-500 text-sm mb-4">
+                            {errorMessage}
+                        </p>
+                    )}
                     {loginMethod === 'email' ? (
                         <EmailLoginForm onSubmit={onSubmit} />
                     ) : (
                         <UsernameLoginForm onSubmit={onSubmit} />
                     )}
                 </CardContent>
-                
+
                 <CardFooter>
                     <p>
                         Not registered? Sign up{' '}
