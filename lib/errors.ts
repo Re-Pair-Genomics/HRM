@@ -76,3 +76,12 @@ export class CreateOrganizationFailedError extends Error {
         this.response = response;
     }
 }
+
+// Not sure if we should change name to invalid invitation code
+export class OrganizationNotFoundError extends Error {
+    response: QueryCommandOutput;
+    constructor(response: QueryCommandOutput) {
+        super('Organization not found');
+        this.response = response;
+    }
+}
