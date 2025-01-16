@@ -8,7 +8,6 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -48,7 +47,6 @@ export default function OrganizationInvitationForm(
                         name="invitationCode"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Invitation Code</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="text"
@@ -61,7 +59,7 @@ export default function OrganizationInvitationForm(
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Join Organization</Button>
+                    <Button type="submit">Submit</Button>
                 </div>
             </form>
         </Form>
