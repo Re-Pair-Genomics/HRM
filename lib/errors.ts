@@ -77,7 +77,6 @@ export class CreateOrganizationFailedError extends Error {
     }
 }
 
-// Not sure if we should change name to invalid invitation code
 export class OrganizationNotFoundError extends Error {
     response: QueryCommandOutput;
     constructor(response: QueryCommandOutput) {
