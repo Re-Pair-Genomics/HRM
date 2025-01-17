@@ -76,3 +76,11 @@ export class CreateOrganizationFailedError extends Error {
         this.response = response;
     }
 }
+
+export class OrganizationNotFoundError extends Error {
+    response: QueryCommandOutput;
+    constructor(response: QueryCommandOutput) {
+        super('Organization not found');
+        this.response = response;
+    }
+}

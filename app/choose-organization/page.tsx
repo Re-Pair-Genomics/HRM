@@ -57,7 +57,11 @@ export default function ChooseOrganizationPage() {
                             Join an existing organization and collaborate with
                             your team.
                         </p>
-                        <Button variant="default" className="mt-6 w-full">
+                        <Button
+                            variant="default"
+                            className="mt-6 w-full"
+                            onClick={() => router.push('/join-organization')}
+                        >
                             Join
                         </Button>
                     </CardContent>
