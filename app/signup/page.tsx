@@ -10,7 +10,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import SignupForm, { SignupFormValues } from './SignupForm';
-import { signup } from '../actions/signup';
+import { signup } from '../action/signup';
 
 export default function Page() {
     const router = useRouter();

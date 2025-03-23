@@ -21,7 +21,7 @@ import UsernameLoginForm, {
     UsernameLoginFormValues
 } from './UsernameLoginForm';
 import EmailLoginForm, { EmailLoginFormValues } from './EmailLoginForm';
-import { login } from '../actions/login';
+import { login } from '../action/login';
 
 type LoginMethod = 'email' | 'username';
 

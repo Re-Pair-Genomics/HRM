@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 import { useState } from 'react';
-import { createOrganization } from '../actions/createOrganization';
+import { createOrganization } from '../action/createOrganization';
 import OrganizationForm, { OrganizationFormValues } from './OrganizationForm';
 
 export default function Page() {
